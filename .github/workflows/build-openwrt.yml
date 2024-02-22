@@ -25,8 +25,8 @@ jobs:
       run: |
         sudo apt update
         sudo apt install build-essential libncurses5-dev gawk git libssl-dev gettext zlib1g-dev swig unzip time rsync python3 python3-setuptools python3-yaml -y
-        git config --global user.email "shi05275@163.com"
-        git config --global user.name "JiaY-shi"
+        git config --global user.email "rafaelgenel@yahoo.com.au"
+        git config --global user.name "rafolg"
         git config --global credential.helper store
         echo ${{ secrets.GIT_URL_TOKEN }} > ~/.git-credentials
         
