@@ -34,7 +34,7 @@ jobs:
       run: |
         CRTDIR=$(pwd)
         git clone -b ${{ inputs.branch_name }} ${{ inputs.rep_url }} ~/openwrt
-        cp -rf feeds.conf ~/openwrt
+        cp -rf ~/openwrt/feeds.conf.default ~/openwrt/feeds.conf
         cd ~/openwrt
         ./scripts/feeds update -a && ./scripts/feeds install -a
         cp -rf $CRTDIR/${{ inputs.config_file }} ~/openwrt/.config
