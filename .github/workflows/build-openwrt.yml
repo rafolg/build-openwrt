@@ -6,15 +6,15 @@ on:
       rep_url:
         description: '仓库地址'     
         required: true
-        default: 'https://github.com/JiaY-shi/owrt.git'
+        default: 'https://github.com/JiaY-shi/openwrt.git'
       branch_name:
         description: '分支'     
         required: true
-        default: 'ipq60xx-devel'
+        default: 'ipq60xx-devel_nss'
       config_file:
         description: '配置文件'     
         required: true
-        default: 'gl-ax1800.config' 
+        default: 'gl-axt1800.nss.config' 
 
 jobs:
   build:
@@ -25,11 +25,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install build-essential libncurses5-dev gawk git libssl-dev gettext zlib1g-dev swig unzip time rsync python3 python3-setuptools python3-yaml -y
-        git config --global user.email "shi05275@163.com"
-        git config --global user.name "JiaY-shi"
-        git config --global credential.helper store
-        echo ${{ secrets.GIT_URL_TOKEN }} > ~/.git-credentials
-        
+                
         sudo apt autoclean
         sudo apt autoremove --purge
         sudo rm -rf /usr/share/dotnet
@@ -38,7 +34,7 @@ jobs:
       run: |
         CRTDIR=$(pwd)
         git clone -b ${{ inputs.branch_name }} ${{ inputs.rep_url }} ~/openwrt
-        cp -rf feeds.conf ~/openwrt
+        cp -rf feeds.conf ~/openwrt/feeds.conf
         cd ~/openwrt
         ./scripts/feeds update -a && ./scripts/feeds install -a
         cp -rf $CRTDIR/${{ inputs.config_file }} ~/openwrt/.config
